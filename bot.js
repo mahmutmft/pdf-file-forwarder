@@ -1,20 +1,36 @@
-require('dotenv').config();
 const { Client, GatewayIntentBits } = require('discord.js');
 
-// Креирај Discord клиент
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
+const TOKEN = 'YOUR_BOT_TOKEN_HERE';
 
-// Ботот е онлајн
-client.once('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
+const SOURCE_CHANNEL_ID = 'CHANNEL_ID_HERE'; 
+const TARGET_CHANNEL_ID = 'CHANNEL_ID_HERE'; 
+
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+    ],
 });
 
-// Реакција на пораки
-client.on('messageCreate', (message) => {
-    if (message.content === '!hello') {
-        message.channel.send('Здраво! Јас сум ботот!');
+client.once('ready', () => {
+    console.log(`BOT IS ACTIVE ${client.user.tag}`);
+});
+
+client.on('messageCreate', async (message) => {
+    if (message.channel.id === SOURCE_CHANNEL_ID && message.attachments.size > 0) {
+        message.attachments.forEach((attachment) => {
+            if (attachment.name.endsWith('.pdf')) {
+                const targetChannel = client.channels.cache.get(TARGET_CHANNEL_ID);
+                if (targetChannel) {
+                    targetChannel.send({
+                        content: `PDF file од ${message.author.username}:`,
+                        files: [attachment.url],
+                    });
+                }
+            }
+        });
     }
 });
 
-// Логирај го ботот
-client.login(process.env.DISCORD_TOKEN);
+client.login(TOKEN);
