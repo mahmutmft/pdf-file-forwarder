@@ -1,16 +1,23 @@
 {
-  "name": "pdf-file-forwarder",
+  "name": "pdf-file-forwarder-bot",
   "version": "1.0.0",
-  "description": "🚀 Едноставен и лесен за користење Discord бот за управување и препраќање на PDF документи.",
-  "main": "index.js",
+  "description": "A Discord bot that forwards PDF files between channels",
+  "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node bot.js",
+    "dev": "nodemon bot.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^14.16.3",
-    "dotenv": "^16.4.5"
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "engines": {
+    "node": ">=16.9.0"
   }
 }
