@@ -1,7 +1,7 @@
 {
   "name": "pdf-file-forwarder-bot",
-  "version": "1.0.0",
-  "description": "A Discord bot that forwards PDF files between channels",
+  "version": "1.1.0",
+  "description": "Discord bot for automating PDF sharing between channels with rich embeds and file management",
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js",
